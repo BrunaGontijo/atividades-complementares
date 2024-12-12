@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+</head>
+<body>
+<h1>JSON</h1>
+<center>
+    <input id="cep" type="text" placeholder="digite o CEP">
+
+    <button onclick="buscarCEP()">Buscar</button>
+    <p id="texto"></p>
+</center>
+<script>
+function buscarCEP() {
+    let input = document.getElementById('cep').value;
+    const ajax = new XMLHttpRequest();
+    ajax.open('GET','https://viacep.com.br/ws/' + input + '/json/');
+    ajax.send();
+    ajax.onload = function () {
+    // document.getElementById('texto').innerHTML = this.responseText;
+    let obj = JSON.parse(this.responseText); 
+    let logradouro = obj.logradouro; 
+    let cidade = obj.localidade; 
+    let estado = obj.uf;    
+
+    
+   document.getElementById('texto').innerHTML = "Logradouro:" +logradouro+
+   "<br>Cidade:" +cidade+"<br>Estado:" +estado;
+  
+
+}
+}
+
+
+
+
+
+    
+    
+    
+    
+ 
+
+</script>
+</body>
+</html>
